@@ -1,0 +1,33 @@
+<!doctype html>
+<!--
+  1200x630 Open Graph / Twitter social card template.
+  Rendered to PNG by a headless browser at build time (see prerender.mjs).
+  Edit the brand colors, text and (optionally) add a logo/screenshot.
+-->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      * { margin: 0; box-sizing: border-box; }
+      body {
+        width: 1200px; height: 630px;
+        font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
+        background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 55%, #3b82f6 100%);
+        color: #fff; display: flex; flex-direction: column; justify-content: center;
+        padding: 90px; position: relative; overflow: hidden;
+      }
+      .dot { position: absolute; right: -120px; top: -120px; width: 520px; height: 520px;
+        border-radius: 50%; background: rgba(255,255,255,0.08); }
+      .brand { font-size: 40px; font-weight: 800; letter-spacing: -0.02em; opacity: 0.95; }
+      h1 { font-size: 76px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.05;
+        margin-top: 28px; max-width: 950px; }
+      p { font-size: 32px; font-weight: 500; opacity: 0.92; margin-top: 28px; max-width: 900px; }
+    </style>
+  </head>
+  <body>
+    <div class="dot"></div>
+    <div class="brand">Example</div>
+    <h1>Your one-line value proposition</h1>
+    <p>Who it's for and what they get.</p>
+  </body>
+</html>
