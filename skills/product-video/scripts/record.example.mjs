@@ -159,7 +159,7 @@ await settle()
     kicker: 'MEDLEMSREGISTER',
     title: 'Alla medlemmar samlade',
     narration:
-      'Medlemsregistret i GlennBook samlar alla era medlemmar på ett ställe — med medlemskap, kontaktuppgifter och historik.',
+      'Medlemsregistret samlar alla era medlemmar på ett ställe — med medlemskap, kontaktuppgifter och historik.',
     image: await shoot('01-register'),
     focus: table,
     zoom: 1.18,
@@ -258,12 +258,13 @@ await settle(2000)
     kicker: 'AUTOMATISKA PÅMINNELSER',
     title: 'Inga förnyelser glöms bort',
     narration:
-      'När ett medlemskap närmar sig förnyelse dyker det upp här automatiskt, och GlennBook skickar påminnelser åt er — så att ingen medlem glöms bort och inga intäkter tappas.',
+      'När ett medlemskap närmar sig förnyelse dyker det upp här automatiskt, och plattformen skickar påminnelser åt er — så att ingen medlem glöms bort och inga intäkter tappas.',
     image: await shoot('05-renewals'),
     focus: list,
     zoom: 1.28,
     cursor: { x: VW * 0.5, y: VH * 0.45 },
     cursorTo: remindBtn,
+    click: true,
   })
 }
 

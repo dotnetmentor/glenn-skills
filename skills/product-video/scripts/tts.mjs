@@ -1,10 +1,10 @@
 // ---------------------------------------------------------------------------
-// Multi-provider Swedish voiceover → WAV (the rest of the pipeline is unchanged).
+// Multi-provider voiceover → WAV (the rest of the pipeline is unchanged).
 //
 // Providers (pick via TTS_PROVIDER, else auto by available key):
 //   • elevenlabs — most natural/consistent (eleven_multilingual_v2). pcm_24000.
 //   • gemini     — Google Gemini TTS (prebuilt voices). PCM base64.
-//   • espeak     — offline fallback (espeak-ng -v sv) when no key / on error.
+//   • espeak     — offline fallback (espeak-ng) when no key / on error.
 //
 // Keys (never committed — gitignored files or env):
 //   ELEVENLABS_API_KEY / .elevenlabs-key   GEMINI_API_KEY / .gemini-key
@@ -59,7 +59,8 @@ function pcmToWav(pcm, sampleRate = 24000, channels = 1, bits = 16) {
 }
 
 function espeak(text, outPath) {
-  execFileSync('espeak-ng', ['-v', 'sv', '-s', '150', '-p', '42', '-w', outPath, text])
+  const lang = (process.env.TTS_LANG || 'en').trim()
+  execFileSync('espeak-ng', ['-v', lang, '-s', '150', '-p', '42', '-w', outPath, text])
 }
 
 // Throttle + retry so the free-tier TTS rate limit (HTTP 429) never silently
@@ -72,7 +73,7 @@ async function gemini(text, outPath, key, { voice = 'Charon', model = 'gemini-2.
   // IMPORTANT: send the plain text. A style/persona instruction prefix
   // ("read this warmly…") makes the model re-interpret the speaker per call,
   // so the timbre drifts between beats. The prebuilt `voiceName` alone keeps
-  // one consistent voice across every segment. (Swedish is auto-detected.)
+  // one consistent voice across every segment. (Language is auto-detected.)
   const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${key}`
   const body = JSON.stringify({
     contents: [{ parts: [{ text }] }],
@@ -112,8 +113,8 @@ async function gemini(text, outPath, key, { voice = 'Charon', model = 'gemini-2.
 
 // ElevenLabs — most natural / consistent. Returns raw PCM (pcm_24000) which we
 // wrap as WAV. voice = an ElevenLabs voice_id (override per render via opts.voice
-// or ELEVEN_VOICE_ID). model defaults to the multilingual model (good Swedish).
-// friendly name → premade voice_id (multilingual, work well for Swedish)
+// or ELEVEN_VOICE_ID). model defaults to the multilingual model.
+// friendly name → premade voice_id (multilingual)
 const ELEVEN_VOICES = {
   sarah: 'EXAVITQu4vr4xnSDxMaL',
   charlotte: 'XB0fDUnXU5powFXDhCwa',

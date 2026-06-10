@@ -122,13 +122,14 @@ await settle()
     id: 'name',
     kicker: 'KOM IGÅNG',
     title: 'Döp din verksamhet',
-    narration: 'Att komma igång med GlennBook tar bara minuter. Börja med att döpa din verksamhet — länken till er medlemsportal skapas direkt.',
+    narration: 'Att komma igång tar bara minuter. Börja med att döpa din verksamhet — länken till er portal skapas direkt.',
     image: img,
     revealImage: reveal,
     focus: card,
     zoom: 1.25,
     cursor: { x: VW * 0.5, y: VH * 0.5 },
     cursorTo: cont,
+    click: true,
   })
 }
 
@@ -316,7 +317,7 @@ await page.getByText(/allt redo|ni är live|slutför/i).first().waitFor({ timeou
   } catch (e) {
     console.log('  finish skipped:', e.message.split('\n')[0])
   }
-  const card = fallback(await measureText(['Ni är live', 'medlemsportal', 'Kopiera', 'glennbook.se']), { x: 360, y: 150, width: 760, height: 480 })
+  const card = fallback(await measureText(['Ni är live', 'medlemsportal', 'Kopiera']), { x: 360, y: 150, width: 760, height: 480 })
   timeline.push({
     id: 'live',
     kicker: 'KLART',
