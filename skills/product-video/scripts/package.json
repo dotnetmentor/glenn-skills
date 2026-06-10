@@ -1,0 +1,11 @@
+{
+  "name": "product-video",
+  "private": true,
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Self-contained engine for cinematic narrated product-walkthrough videos (record real app with Playwright → canvas+ffmpeg compositor → AI voiceover).",
+  "dependencies": {
+    "@napi-rs/canvas": "^0.1.100",
+    "playwright": "^1.60.0"
+  }
+}
